@@ -1,0 +1,27 @@
+<h1>Listing gossips</h1>
+
+<table>
+  <tr>
+    <th>Text</th>
+    <th>Score</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gossips.each do |gossip| %>
+  <tr>
+    <td><%= gossip.text %></td>
+    <td><%= gossip.score_id %></td>
+    <td><%= gossip.user_id %></td>
+    <td><%= link_to 'Show', gossip %></td>
+    <td><%= link_to 'Edit', edit_gossip_path(gossip) %></td>
+    <td><%= link_to 'Destroy', gossip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gossip', new_gossip_path %>

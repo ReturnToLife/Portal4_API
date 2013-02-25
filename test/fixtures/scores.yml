@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: scores
+#
+#  id         :integer          not null, primary key
+#  score_pos  :integer
+#  score_neg  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  score_pos: 1
+  score_neg: 1
+
+two:
+  score_pos: 1
+  score_neg: 1

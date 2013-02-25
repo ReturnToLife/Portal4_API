@@ -1,0 +1,2 @@
+module CommentGossipsHelper
+end

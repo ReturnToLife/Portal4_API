@@ -1,0 +1,25 @@
+<h1>Listing promos</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>School</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @promos.each do |promo| %>
+  <tr>
+    <td><%= promo.title %></td>
+    <td><%= promo.school_id %></td>
+    <td><%= link_to 'Show', promo %></td>
+    <td><%= link_to 'Edit', edit_promo_path(promo) %></td>
+    <td><%= link_to 'Destroy', promo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Promo', new_promo_path %>

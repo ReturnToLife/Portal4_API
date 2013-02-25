@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: promos
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  school_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  school_id: 1
+
+two:
+  title: MyString
+  school_id: 1

@@ -1,0 +1,29 @@
+<h1>Listing comment_gossips</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Content</th>
+    <th>Gossip</th>
+    <th>Score</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @comment_gossips.each do |comment_gossip| %>
+  <tr>
+    <td><%= comment_gossip.user_id %></td>
+    <td><%= comment_gossip.content %></td>
+    <td><%= comment_gossip.gossip_id %></td>
+    <td><%= comment_gossip.score_id %></td>
+    <td><%= link_to 'Show', comment_gossip %></td>
+    <td><%= link_to 'Edit', edit_comment_gossip_path(comment_gossip) %></td>
+    <td><%= link_to 'Destroy', comment_gossip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Comment gossip', new_comment_gossip_path %>

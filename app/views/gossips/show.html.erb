@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Text:</b>
+  <%= @gossip.text %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @gossip.score_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @gossip.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_gossip_path(@gossip) %> |
+<%= link_to 'Back', gossips_path %>

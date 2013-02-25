@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @article.title %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @article.user_id %>
+</p>
+
+<p>
+  <b>Publication date:</b>
+  <%= @article.publication_date %>
+</p>
+
+<p>
+  <b>Thumbnail:</b>
+  <%= @article.thumbnail %>
+</p>
+
+<p>
+  <b>Nb comments:</b>
+  <%= @article.nb_comments %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @article.content %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @article.category %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @article.status %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @article.score_id %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @article.event_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
