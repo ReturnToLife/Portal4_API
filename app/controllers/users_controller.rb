@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+#  before_filter :authenticate_user!, :if => Proc.new { |c| c.request.format == 'application/json' }
+
+
   # GET /users
   # GET /users.json
   def index
@@ -80,4 +83,5 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

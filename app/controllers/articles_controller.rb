@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all
 
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @articles }
@@ -41,6 +42,7 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
+
     @article = Article.new(params[:article])
     @article.publication_date = Time.now
     @article.user_id = 1 # a changer par le mec connecté avec son token

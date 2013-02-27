@@ -47,6 +47,7 @@ WsReturn::Application.routes.draw do
 
   resources :users
 
+  resources :api_session
 
   root :to => "home#index"
   # The priority is based upon order of creation:

@@ -20,12 +20,12 @@
 class Article < ActiveRecord::Base
   attr_accessible :category, :content, :event_id, :nb_comments, :publication_date, :score_id, :status, :thumbnail, :title, :user_id
 
-  validates :category, :presence => true
-  validates :content, :prensence => true
-  validates :publication_date, :presence => true
-  validates :score , :presence => true
-  validates :title, :presence => true
-  validates :user_id, :presence => true
+#  validates :category, :presence => true
+ # validates :content, :prensence => true
+ # validates :publication_date, :presence => true
+ # validates :score , :presence => true
+ # validates :title, :presence => true
+ # validates :user_id, :presence => true
 
   belongs_to :user
   has_many :authors
