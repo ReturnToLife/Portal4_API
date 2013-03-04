@@ -18,7 +18,7 @@
 #
 
 class Article < ActiveRecord::Base
-  attr_accessible :category, :content, :event_id, :nb_comments, :publication_date, :score_id, :status, :thumbnail, :title, :user_id
+  attr_accessible :category, :content, :event_id, :nb_comments, :publication_date, :score_id, :status, :thumbnail, :title, :user_id, :id, :created_at, :updated_at
 
 #  validates :category, :presence => true
  # validates :content, :prensence => true

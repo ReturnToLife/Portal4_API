@@ -43,7 +43,9 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
 
-    @article = Article.new(params[:article])
+    @article = Article.new.from_json(params[:article])
+    puts "ASDADASDSADASD"
+    puts params[:article]
     @article.publication_date = Time.now
     @article.user_id = 1 # a changer par le mec connecté avec son token
     @article.score = Score.create(:score_pos => 0, :score_neg => 0)
