@@ -17,11 +17,18 @@ class ApiSessionController < ApplicationController
 
   def destroy
     @user = User.find_by_authentication_token(params[:api_token])
-    @user.authentication_token = nil
-    @user.save
-    respond_to do |format|
+    if (@user == nil)
+      respond_to do |format|
+        format.html # create.html.erb
+        format.json { render json: "Invalid token" }
+      end
+    else
+      @user.authentication_token = nil
+      @user.save
+      respond_to do |format|
         format.html # create.html.erb
         format.json { render json: "token erased" }
+      end
     end
   end
 end
