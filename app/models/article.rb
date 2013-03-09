@@ -30,6 +30,6 @@ class Article < ActiveRecord::Base
   belongs_to :user
   has_many :authors
   has_one :score
-  has_many :comment_articles
+  has_many :acomments, :dependent => :destroy
   has_many :tags
 end

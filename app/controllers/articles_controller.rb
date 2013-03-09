@@ -17,10 +17,11 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @article = Article.find(params[:id])
+    hash = {:article => @article, :comments => @article.acomments}.to_json
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @article }
+      format.json { render json: hash}
     end
   end
 
@@ -45,7 +46,6 @@ class ArticlesController < ApplicationController
   def create
 
     @article = Article.new.from_json(params[:article])
-    puts "ASDADASDSADASD"
     puts params[:article]
     @article.publication_date = Time.now
     @article.user_id = 1 # a changer par le mec connecté avec son token

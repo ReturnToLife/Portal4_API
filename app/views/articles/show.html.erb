@@ -49,7 +49,38 @@
   <b>Event:</b>
   <%= @article.event_id %>
 </p>
+<h2>Comments</h2>
+<% @article.acomments.each do |comment| %>
+  <p>
+    <b>Commenter:</b>
+    <%= comment.user %>
+  </p>
+ 
+  <p>
+    <b>Comment:</b>
+    <%= comment.body %>
+  </p>
+<p>
+  <%= link_to 'Destroy Comment', [comment.article, comment],
+      :confirm => 'Are you sure?',
+  :method => :delete %>
+</p>
+<% end %>
 
+<h2>Add a comment:</h2>
+<%= form_for([@article, @article.acomments.build]) do |f| %>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>

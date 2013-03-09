@@ -15,15 +15,6 @@ WsReturn::Application.routes.draw do
   resources :scores
 
 
-  resources :comment_gossips
-
-
-  resources :comment_events
-
-
-  resources :comment_articles
-
-
   resources :gossips
 
 
@@ -36,7 +27,9 @@ WsReturn::Application.routes.draw do
   resources :events
 
 
-  resources :articles
+  resources :articles do
+    resources :acomments
+  end
 
 
   resources :jobs

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223201947) do
+ActiveRecord::Schema.define(:version => 20130308044231) do
+
+  create_table "acomments", :force => true do |t|
+    t.string   "user"
+    t.text     "body"
+    t.integer  "article_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "acomments", ["article_id"], :name => "index_acomments_on_article_id"
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -32,33 +42,6 @@ ActiveRecord::Schema.define(:version => 20130223201947) do
     t.integer  "article_id"
     t.integer  "user_id"
     t.string   "job"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "comment_articles", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.integer  "article_id"
-    t.integer  "score_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "comment_events", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.integer  "event_id"
-    t.integer  "score_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "comment_gossips", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.integer  "gossip_id"
-    t.integer  "score_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
