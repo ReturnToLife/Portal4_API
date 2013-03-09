@@ -34,8 +34,9 @@ WsReturn::Application.routes.draw do
 
 
   resources :events
+  
 
-
+  match '/articles/delete/:id' => "articles#pdestroy", :via => :post
   resources :articles
 
 
