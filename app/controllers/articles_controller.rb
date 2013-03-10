@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
       hash = {}
       article.attribute_names.each {|var| hash[var] = article.instance_variable_get("@attributes")[var] }
       user = User.find(article.user_id)
-      hash["author_name"] = user.login
+      hash["login"] = user.login
       array.append(hash)
     end
     respond_to do |format|
@@ -37,12 +37,16 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     array = []
+    hash = {}
+    @article.attribute_names.each {|var| hash[var] = @article.instance_variable_get("@attributes")[var] }
+    user = User.find(@article.user_id)
+    hash["login"] = user.login
     @article.acomments.each do |comment|
       user = User.find(comment.user_id)
       array.append({:id => comment.id,:user_login => user.login, :body => comment.body})
     end
     user = User.find(@article.user_id)
-    res = {:article => @article, :comments => array, :author_name => user.login}
+    res = {:article => hash, :comments => array}
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: res}
