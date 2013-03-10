@@ -40,7 +40,6 @@ class ArticlesController < ApplicationController
     hash = {}
     @article.attribute_names.each {|var| hash[var] = @article.instance_variable_get("@attributes")[var] }
     user = User.find(@article.user_id)
-    hash["login"] = user.login
     @article.acomments.each do |comment|
       user = User.find(comment.user_id)
       array.append({:id => comment.id,:user_login => user.login, :body => comment.body})
