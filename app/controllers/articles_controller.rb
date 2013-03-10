@@ -44,14 +44,19 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-
+    @user = User.find_by_authentication_token(params[:auth_token])
     @article = Article.new.from_json(params[:article])
+<<<<<<< HEAD
     puts params[:article]
+=======
+>>>>>>> 76a4eb0197345b8ba0ab99fb84cf92c832e5f2d3
     @article.publication_date = Time.now
-    @article.user_id = 1 # a changer par le mec connecté avec son token
+    @article.user_id = @user.id
     @article.score = Score.create(:score_pos => 0, :score_neg => 0)
       respond_to do |format|
       if @article.save
+        @author = Author.create(:article_id => @article.id, :user_id => @user.id, :job => "author")
+        @author.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render json: @article, status: :created, location: @article }
       else
@@ -77,15 +82,23 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
-  def destroy
-    @article = Article.find(params[:id])
-    @article.destroy
-
-    respond_to do |format|
-      format.html { redirect_to articles_url }
-      format.json { head :no_content }
+  def pdestroy
+    @user = User.find_by_authentication_token(params[:auth_token])
+    puts "here"
+    puts @user.id
+    @author = Author.find_by_user_id_and_article_id(@user.id, params[:id])
+    if (@author != nil)
+      @article = Article.find(params[:id])
+      @article.destroy   
+      respond_to do |format|
+        format.html { redirect_to articles_url }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { render json: "error" }
+        format.json { render json: "error" }
+      end  
     end
   end
 end

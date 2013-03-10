@@ -25,12 +25,14 @@ WsReturn::Application.routes.draw do
 
 
   resources :events
-
+  
 
   resources :articles do
     resources :acomments
   end
 
+  match '/articles/delete/:id' => "articles#pdestroy", :via => :post
+  resources :articles
 
   resources :jobs
 

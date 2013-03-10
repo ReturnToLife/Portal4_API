@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :avatar_url, :city, :email, :firstname, :lastname, :login, :photo_url, :promo_id, :report_url, :school_id, :uid
 
-  before_save :ensure_authentication_token
+
 
   belongs_to :school
   belongs_to :promo
@@ -52,4 +52,8 @@ class User < ActiveRecord::Base
   has_many :comment_gossip
   has_many :comment_event
   has_many :votes
+
+  def newtoken
+    reset_authentication_token!
+  end
 end
