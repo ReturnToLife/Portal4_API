@@ -5,11 +5,17 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
-
-
+    array = []
+    @articles.each do |article|
+      hash = {}
+      article.attribute_names.each {|var| hash[var] = article.instance_variable_get("@attributes")[var] }
+      user = User.find(article.user_id)
+      hash["author_name"] = user.login
+      array.append(hash)
+    end
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @articles }
+      format.json { render json: array }
     end
   end
 
@@ -17,11 +23,16 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @article = Article.find(params[:id])
-    hash = {:article => @article, :comments => @article.acomments}.to_json
-
+    array = []
+    @article.acomments.each do |comment|
+      user = User.find(comment.user_id)
+      array.append({:id => comment.id,:user_login => user.login, :body => comment.body})
+    end
+    user = User.find(@article.user_id)
+    res = {:article => @article, :comments => array, :author_name => user.login}
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: hash}
+      format.json { render json: res}
     end
   end
 
@@ -46,10 +57,6 @@ class ArticlesController < ApplicationController
   def create
     @user = User.find_by_authentication_token(params[:auth_token])
     @article = Article.new.from_json(params[:article])
-<<<<<<< HEAD
-    puts params[:article]
-=======
->>>>>>> 76a4eb0197345b8ba0ab99fb84cf92c832e5f2d3
     @article.publication_date = Time.now
     @article.user_id = @user.id
     @article.score = Score.create(:score_pos => 0, :score_neg => 0)

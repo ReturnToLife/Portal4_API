@@ -32,7 +32,7 @@ WsReturn::Application.routes.draw do
   end
 
   match '/articles/delete/:id' => "articles#pdestroy", :via => :post
-  resources :articles
+  match '/articles/:id/acomments/delete/:id' => "acomments#pdestroy", :via => :post
 
   resources :jobs
 

@@ -1,7 +1,7 @@
 class CreateAcomments < ActiveRecord::Migration
   def change
     create_table :acomments do |t|
-      t.string :user
+      t.integer :user_id
       t.text :body
       t.references :article
 

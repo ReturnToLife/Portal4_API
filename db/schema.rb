@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130308044231) do
 
   create_table "acomments", :force => true do |t|
-    t.string   "user"
+    t.integer  "user_id"
     t.text     "body"
     t.integer  "article_id"
     t.datetime "created_at", :null => false

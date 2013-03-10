@@ -1,8 +1,9 @@
 class AcommentsController < ApplicationController
+  before_filter :authenticate_user!, :if => Proc.new { |c| c.request.format == 'application/json' }
   def create
-    hash = ActiveSupport::JSON.decode(params["acomment"])
-    @article = Article.find(params["article_id"])
-    @comment = @article.acomments.create(hash)
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @article = Article.find(params[:article_id])
+    @comment = @article.acomments.create({:user_id => @user.id, :body => params[:body]})
     respond_to do |format|
       if @comment
         format.html { redirect_to @article, notice: 'Comment was successfully created.' }
@@ -13,13 +14,14 @@ class AcommentsController < ApplicationController
       end
     end
   end
-  def    destroy
+  def   pdestroy
+    @user = User.find_by_authentication_token(params[:auth_token])
     @article = Article.find(params[:article_id])
     @comment = @article.acomments.find(params[:id])
-#    @comment.destroy
+    @comment.destroy
     respond_to do |format|
       format.html { redirect_to @article, notice: 'Comment was successfully destroyed.' }
-      format.json { render(json: {:redirection => article_path(@article), notice: 'Comment was successfully destroyed.'})}
-  end
+      format.json { render(json: article_path(@article))}
+    end
   end
 end
