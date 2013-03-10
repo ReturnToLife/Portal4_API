@@ -5,11 +5,22 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
-
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @articles }
+    end
+  end
+
+  def filterbylogin
+    @login = params[:login]
+    if (@login != nil)
+      @user = User.find_by_login(@login)
+      @articles = Article.find_all_by_user_id(@user.id)
+      
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @articles }
+      end
     end
   end
 

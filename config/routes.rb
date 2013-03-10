@@ -37,6 +37,7 @@ WsReturn::Application.routes.draw do
   
 
   match '/articles/delete/:id' => "articles#pdestroy", :via => :post
+  match '/articles/filterbylogin/:login' => "articles#filterbylogin", :via => :post
   resources :articles
 
 
