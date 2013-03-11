@@ -1,9 +1,30 @@
 # -*- coding: utf-8 -*-
 class ArticlesController < ApplicationController
-  before_filter :authenticate_user!, :if => Proc.new { |c| c.request.format == 'application/json' }
+ # before_filter :authenticate_user!, :if => Proc.new { |c| c.request.format == 'application/json' }
+  before_filter :after_token_authentication
+
+  def after_token_authentication
+    if params[:auth_token].present?
+      @user = User.find_by_authentication_token(params[:auth_token]) # we are finding 
+
+      if (@user == nil)
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'Wrong token' }
+        end 
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'You need a token' }
+      end
+    end
+  end
+
   # GET /articles
   # GET /articles.json
   def index
+    ensure :athenticate_user!
     @articles = Article.all
     array = []
     @articles.each do |article|
