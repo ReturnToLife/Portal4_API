@@ -7,10 +7,12 @@
 #  score_neg  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  article_id :integer
+#  comment_id :integer
 #
 
 class Score < ActiveRecord::Base
-  attr_accessible :score_neg, :score_pos
+  attr_accessible :score_neg, :score_pos, :article_id, :comment_id
 
   has_many :votes
 end

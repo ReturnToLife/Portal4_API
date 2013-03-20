@@ -9,8 +9,12 @@ WsReturn::Application.routes.draw do
   resources :schools
 
 
+
+
   resources :votes
 
+  match '/score/voteArticle' => "scores#voteArticle", :via => :post
+  match '/score/unvoteArticle' => "scores#unvoteArticle", :via => :post
 
   resources :scores
 

@@ -1,4 +1,25 @@
 class ScoresController < ApplicationController
+
+  before_filter :after_token_authentication
+
+  def after_token_authentication
+    if params[:auth_token].present?
+      @user = User.find_by_authentication_token(params[:auth_token]) # we are finding 
+
+      if (@user == nil)
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'Wrong token' }
+        end 
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'You need a token' }
+      end
+    end
+  end
+
   # GET /scores
   # GET /scores.json
   def index
@@ -10,84 +31,70 @@ class ScoresController < ApplicationController
     end
   end
 
-  # GET /scores/1
-  # GET /scores/1.json
-  def show
-    @score = Score.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @score }
-    end
-  end
-
-  # GET /scores/new
-  # GET /scores/new.json
-  def new
-    @score = Score.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @score }
-    end
-  end
-
-  # GET /scores/1/edit
-  def edit
-    @score = Score.find(params[:id])
-  end
-
-  # POST /scores
-  # POST /scores.json
-  def create
-    @score = Score.new(params[:score])
-
-    respond_to do |format|
-      if @score.save
-        format.html { redirect_to @score, notice: 'Score was successfully created.' }
-        format.json { render json: @score, status: :created, location: @score }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /scores/1
-  # PUT /scores/1.json
-  def update
-    @score = Score.find(params[:id])
-
-    respond_to do |format|
-      if @score.update_attributes(params[:score])
-        format.html { redirect_to @score, notice: 'Score was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /scores/1
-  # DELETE /scores/1.json
-  def destroy
-    @score = Score.find(params[:id])
-    @score.destroy
-
-    respond_to do |format|
-      format.html { redirect_to scores_url }
-      format.json { head :no_content }
-    end
-  end
-
   def voteArticle
-
+    @idArticle = params[:idArticle]
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @article = Article.find_by_id(@idArticle)
+    @score = @article.score
+    if (@score != nil)
+      @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
+      if (@oldvote == nil)
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1)
+        @newvote.save
+        @score.score_pos = @score.score_pos + 1
+        @score.save
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You have voted' }
+        end
+      else
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You have already voted' }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'No vote related' }
+      end 
+    end
   end
 
   def voteComment
 
   end
   
+  def unvoteArticle
+    @idArticle = params[:idArticle]
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @score = Article.find(@idArticle).score
+    if (@score != nil)
+      @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
+      if (@oldvote != nil)
+        @oldvote.delete
+        @score.score_pos = @score.score_pos - 1
+        @score.save
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You have unvoted' }
+        end
+      else
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You didn\'t vote yet' }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'No vote related' }
+      end 
+    end
+  end
+
+  def unvoteComment
+  end
+
 end
 

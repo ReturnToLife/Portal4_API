@@ -7,6 +7,8 @@
 #  score_neg  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  article_id :integer
+#  comment_id :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

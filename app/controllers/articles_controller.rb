@@ -66,7 +66,13 @@ class ArticlesController < ApplicationController
       array.append({:id => comment.id,:user_login => user.login, :body => comment.body})
     end
     user = User.find(@article.user_id)
-    res = {:article => hash, :comments => array, :login => user.login}
+    likearray = []
+    votes = Vote.find_all_by_score_id(@article.score.id)
+    votes.each do |vote|
+      user = User.find(vote.user_id)
+      likearray.append(user.login => vote.value)
+    end
+    res = {:article => hash, :comments => array, :login => user.login, :votes => likearray}
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: res}
