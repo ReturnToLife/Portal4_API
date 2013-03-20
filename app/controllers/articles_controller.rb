@@ -66,7 +66,7 @@ class ArticlesController < ApplicationController
       array.append({:id => comment.id,:user_login => user.login, :body => comment.body})
     end
     user = User.find(@article.user_id)
-    res = {:article => hash, :comments => array}
+    res = {:article => hash, :comments => array, :login => user.login}
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: res}

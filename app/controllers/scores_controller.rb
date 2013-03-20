@@ -80,4 +80,14 @@ class ScoresController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def voteArticle
+
+  end
+
+  def voteComment
+
+  end
+  
 end
+

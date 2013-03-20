@@ -1,9 +1,12 @@
 class AcommentsController < ApplicationController
   before_filter :authenticate_user!, :if => Proc.new { |c| c.request.format == 'application/json' }
+
   def create
     @user = User.find_by_authentication_token(params[:auth_token])
+
     @article = Article.find(params[:article_id])
     @comment = @article.acomments.create({:user_id => @user.id, :body => params[:body]})
+
     respond_to do |format|
       if @comment
         format.html { redirect_to @article, notice: 'Comment was successfully created.' }
@@ -14,6 +17,7 @@ class AcommentsController < ApplicationController
       end
     end
   end
+
   def   pdestroy
     @user = User.find_by_authentication_token(params[:auth_token])
     @article = Article.find(params[:article_id])

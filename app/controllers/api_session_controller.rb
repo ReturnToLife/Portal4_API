@@ -8,15 +8,17 @@ class ApiSessionController < ApplicationController
         format.html # create.html.erb
         format.json { render json: "error" }
       else
-        @user.newtoken
+        if (@user.authentication_token == nil)
+          @user.newtoken
+        end
         format.html # create.html.erb
         format.json { render json: @user.authentication_token }
       end
     end
   end
 
-  def destroy
-    @user = User.find_by_authentication_token(params[:api_token])
+  def show
+    @user = User.find_by_authentication_token(params[:auth_token])
     if (@user == nil)
       respond_to do |format|
         format.html # create.html.erb
