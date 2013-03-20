@@ -63,7 +63,13 @@ class ArticlesController < ApplicationController
     user = User.find(@article.user_id)
     @article.acomments.each do |comment|
       user = User.find(comment.user_id)
-      array.append({:id => comment.id,:user_login => user.login, :body => comment.body})
+      commentscore = []
+      cvotes = Vote.find_all_by_score_id(comment.score.id)
+      cvotes.each do |cvote|
+        cuser = User.find(cvote.user_id)
+        commentscore.append(cuser.login => cvote.value)
+      end
+      array.append({:id => comment.id,:user_login => user.login, :body => comment.body, :cvotes => commentscore })
     end
     user = User.find(@article.user_id)
     likearray = []
@@ -102,9 +108,10 @@ class ArticlesController < ApplicationController
     @article = Article.new.from_json(params[:article])
     @article.publication_date = Time.now
     @article.user_id = @user.id
-    @article.score = Score.create(:score_pos => 0, :score_neg => 0)
-      respond_to do |format|
+    respond_to do |format|
       if @article.save
+        @article.score = Score.create(:score_pos => 0, :score_neg => 0)
+        @article.save
         @author = Author.create(:article_id => @article.id, :user_id => @user.id, :job => "author")
         @author.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }

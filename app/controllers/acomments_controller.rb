@@ -9,10 +9,12 @@ class AcommentsController < ApplicationController
 
     respond_to do |format|
       if @comment
+        @comment.score = Score.create(:score_pos => 0, :score_neg => 0)
+        @comment.save
         format.html { redirect_to @article, notice: 'Comment was successfully created.' }
         format.json { render json: @article, status: :created, location: @article }
       else
-       format.html { render action: "new" }
+        format.html { render action: "new" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end

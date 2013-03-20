@@ -56,13 +56,39 @@ class ScoresController < ApplicationController
     else
       respond_to do |format|
         format.html # index.html.erb
-        format.json { render json: 'No vote related' }
+        format.json { render json: 'No score related' }
       end 
     end
   end
 
-  def voteComment
-
+  def voteAcomment
+    @idAcomment = params[:idAcomment]
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @acomment = Acomment.find_by_id(@idAcomment)
+    @score = @acomment.score
+    if (@score != nil)
+      @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
+      if (@oldvote == nil)
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1)
+        @newvote.save
+        @score.score_pos = @score.score_pos + 1
+        @score.save
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You have voted' }
+        end
+      else
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You have already voted' }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'No score related' }
+      end 
+    end
   end
   
   def unvoteArticle
@@ -88,12 +114,38 @@ class ScoresController < ApplicationController
     else
       respond_to do |format|
         format.html # index.html.erb
-        format.json { render json: 'No vote related' }
+        format.json { render json: 'No score related' }
       end 
     end
   end
 
-  def unvoteComment
+  def unvoteAcomment
+    @idAcomment = params[:idAcomment]
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @acomment = Acomment.find_by_id(@idAcomment)
+    @score = @acomment.score
+    if (@score != nil)
+      @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
+      if (@oldvote != nil)
+        @oldvote.delete
+        @score.score_pos = @score.score_pos - 1
+        @score.save
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You have unvoted' }
+        end
+      else
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You didn\'t vote yet' }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'No score related' }
+      end 
+    end
   end
 
 end

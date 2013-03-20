@@ -16,6 +16,9 @@ WsReturn::Application.routes.draw do
   match '/score/voteArticle' => "scores#voteArticle", :via => :post
   match '/score/unvoteArticle' => "scores#unvoteArticle", :via => :post
 
+  match '/score/voteAcomment' => "scores#voteAcomment", :via => :post
+  match '/score/unvoteAcomment' => "scores#unvoteAcomment", :via => :post
+
   resources :scores
 
 

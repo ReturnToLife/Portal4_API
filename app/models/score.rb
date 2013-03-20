@@ -2,17 +2,17 @@
 #
 # Table name: scores
 #
-#  id         :integer          not null, primary key
-#  score_pos  :integer
-#  score_neg  :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  article_id :integer
-#  comment_id :integer
+#  id          :integer          not null, primary key
+#  score_pos   :integer
+#  score_neg   :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  article_id  :integer
+#  acomment_id :integer
 #
 
 class Score < ActiveRecord::Base
-  attr_accessible :score_neg, :score_pos, :article_id, :comment_id
+  attr_accessible :score_neg, :score_pos, :article_id, :acomment_id
 
   has_many :votes
 end
