@@ -45,10 +45,15 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    array = []
+    hash = {}
+    @event.attribute_names.each {|var| hash[var] = @event.instance_variable_get("@attributes")[var] }  
 
+    user_event = User.find(@event.user_id)
+    res = {:event => hash, :login => user_event.login}
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @event }
+      format.json { render json: res }
     end
   end
 
@@ -66,6 +71,16 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    array = []
+    hash = {}
+    @event.attribute_names.each {|var| hash[var] = @event.instance_variable_get("@attributes")[var] }  
+
+    user_event = User.find(@event.user_id)
+    res = {:event => hash, :login => user_event.login}
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: res }
+    end
   end
 
   # POST /events
