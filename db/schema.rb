@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325175611) do
+ActiveRecord::Schema.define(:version => 20130325233105) do
 
   create_table "acomments", :force => true do |t|
     t.integer  "user_id"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(:version => 20130325175611) do
   create_table "events", :force => true do |t|
     t.datetime "date"
     t.integer  "user_id"
+    t.integer  "score_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "gcomments", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.integer  "gossip_id"
     t.integer  "score_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

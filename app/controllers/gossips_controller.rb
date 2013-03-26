@@ -34,17 +34,27 @@ class GossipsController < ApplicationController
   # GET /gossips/1.json
   def show
     @gossip = Gossip.find(params[:id])
+    array = []
     hash = {}
     @gossip.attribute_names.each {|var| hash[var] = @gossip.instance_variable_get("@attributes")[var] }
-
+    @gossip.gcomments.each do |comment|
+      user = User.find(comment.user_id)
+      commentscore = []
+      cvotes = Vote.find_all_by_score_id(comment.score.id)
+      cvotes.each do |cvote|
+        cuser = User.find(cvote.user_id)
+        commentscore.append(cuser.login => cvote.value)
+      end
+      array.append({:id => comment.id,:user_login => user.login, :body => comment.body, :cvotes => commentscore })
+    end
     likearray = []
     votes = Vote.find_all_by_score_id(@gossip.score.id)
     votes.each do |vote|
       user = User.find(vote.user_id)
       likearray.append(user.login => vote.value)
     end
-
-    res = { :gossip => hash, :votes => likearray}
+    user = User.find(@gossip.user_id)
+    res = { :gossip => hash, :comments => array, :login => user.login, :votes => likearray}
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: res }
