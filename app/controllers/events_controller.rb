@@ -31,7 +31,7 @@ class EventsController < ApplicationController
       hash = {}
       event.attribute_names.each {|var| hash[var] = event.instance_variable_get("@attributes")[var] }
       user = User.find(event.user_id)
-      hash["login"] = user.login
+      # hash["login"] = user.login
       array.append(hash)
     end
     print array
