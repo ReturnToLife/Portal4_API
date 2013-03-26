@@ -1,4 +1,7 @@
 WsReturn::Application.routes.draw do
+  resources :events
+
+
   get "home/index"
 
   devise_for :users
@@ -29,11 +32,6 @@ WsReturn::Application.routes.draw do
 
 
   resources :tags
-
-
-  resources :events
-  
-
   resources :articles do
     resources :acomments
   end

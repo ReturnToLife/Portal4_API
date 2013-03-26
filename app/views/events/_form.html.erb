@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :date %><br />
-    <%= f.datetime_select :date %>
+    <%= f.label :category %><br />
+    <%= f.text_field :category %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br />
@@ -22,6 +22,26 @@
   <div class="field">
     <%= f.label :score_id %><br />
     <%= f.number_field :score_id %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :place %><br />
+    <%= f.text_field :place %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br />
+    <%= f.datetime_select :end %>
   </div>
   <div class="actions">
     <%= f.submit %>

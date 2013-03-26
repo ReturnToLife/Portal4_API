@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320035805) do
+ActiveRecord::Schema.define(:version => 20130323022859) do
 
   create_table "acomments", :force => true do |t|
     t.integer  "user_id"
@@ -48,11 +48,16 @@ ActiveRecord::Schema.define(:version => 20130320035805) do
   end
 
   create_table "events", :force => true do |t|
-    t.datetime "date"
+    t.string   "category"
     t.integer  "user_id"
     t.integer  "score_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "title"
+    t.text     "description"
+    t.string   "place"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "gossips", :force => true do |t|

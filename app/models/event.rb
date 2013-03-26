@@ -1,19 +1,5 @@
-# == Schema Information
-#
-# Table name: events
-#
-#  id         :integer          not null, primary key
-#  date       :datetime
-#  user_id    :integer
-#  score_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class Event < ActiveRecord::Base
-  attr_accessible :date, :score_id, :user_id
+  attr_accessible :category, :description, :end, :place, :score_id, :start, :title, :user_id, :created_at, :id, :updated_at
 
 
-  has_one :score
-  belongs_to :user
 end
