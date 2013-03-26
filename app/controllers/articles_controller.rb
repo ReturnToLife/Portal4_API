@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+
 class ArticlesController < ApplicationController
- # before_filter :authenticate_user!, :if => Proc.new { |c| c.request.format == 'application/json' }
+
   before_filter :after_token_authentication
 
   def after_token_authentication
@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    ensure :athenticate_user!
+   
     @articles = Article.all
     array = []
     @articles.each do |article|
@@ -60,7 +60,6 @@ class ArticlesController < ApplicationController
     array = []
     hash = {}
     @article.attribute_names.each {|var| hash[var] = @article.instance_variable_get("@attributes")[var] }
-    user = User.find(@article.user_id)
     @article.acomments.each do |comment|
       user = User.find(comment.user_id)
       commentscore = []
@@ -71,13 +70,14 @@ class ArticlesController < ApplicationController
       end
       array.append({:id => comment.id,:user_login => user.login, :body => comment.body, :cvotes => commentscore })
     end
-    user = User.find(@article.user_id)
+    
     likearray = []
     votes = Vote.find_all_by_score_id(@article.score.id)
     votes.each do |vote|
       user = User.find(vote.user_id)
       likearray.append(user.login => vote.value)
     end
+    user = User.find(@article.user_id)
     res = {:article => hash, :comments => array, :login => user.login, :votes => likearray}
     respond_to do |format|
       format.html # show.html.erb

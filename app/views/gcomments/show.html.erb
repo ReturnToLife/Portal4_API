@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @gcomment.user_id %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @gcomment.body %>
+</p>
+
+<p>
+  <b>Gossip:</b>
+  <%= @gcomment.gossip_id %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @gcomment.score_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_gcomment_path(@gcomment) %> |
+<%= link_to 'Back', gcomments_path %>

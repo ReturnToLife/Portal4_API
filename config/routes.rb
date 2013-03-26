@@ -1,6 +1,6 @@
 WsReturn::Application.routes.draw do
-  resources :events
 
+  resources :events
 
   get "home/index"
 
@@ -11,9 +11,6 @@ WsReturn::Application.routes.draw do
 
   resources :schools
 
-
-
-
   resources :votes
 
   match '/score/voteArticle' => "scores#voteArticle", :via => :post
@@ -22,10 +19,16 @@ WsReturn::Application.routes.draw do
   match '/score/voteAcomment' => "scores#voteAcomment", :via => :post
   match '/score/unvoteAcomment' => "scores#unvoteAcomment", :via => :post
 
+  match '/score/voteGossip' => "scores#voteGossip", :via => :post
+  match '/score/voteAgainstGossip' => "scores#voteAgainstGossip", :via => :post
+  match '/score/unvoteGossip' => "scores#unvoteGossip", :via => :post
+
   resources :scores
 
-
-  resources :gossips
+  
+  resources :gossips do
+    resources :gcomments
+  end
 
 
   resources :authors

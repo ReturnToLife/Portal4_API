@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130323022859) do
+ActiveRecord::Schema.define(:version => 20130325233105) do
 
   create_table "acomments", :force => true do |t|
     t.integer  "user_id"
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(:version => 20130323022859) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "gcomments", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.integer  "gossip_id"
+    t.integer  "score_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "gossips", :force => true do |t|
     t.string   "text"
     t.integer  "score_id"
@@ -103,6 +112,8 @@ ActiveRecord::Schema.define(:version => 20130323022859) do
     t.datetime "updated_at",  :null => false
     t.integer  "article_id"
     t.integer  "acomment_id"
+    t.integer  "gossip_id"
+    t.integer  "gcomment_id"
   end
 
   create_table "tags", :force => true do |t|

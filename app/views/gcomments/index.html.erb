@@ -1,0 +1,29 @@
+<h1>Listing gcomments</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Body</th>
+    <th>Gossip</th>
+    <th>Score</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gcomments.each do |gcomment| %>
+  <tr>
+    <td><%= gcomment.user_id %></td>
+    <td><%= gcomment.body %></td>
+    <td><%= gcomment.gossip_id %></td>
+    <td><%= gcomment.score_id %></td>
+    <td><%= link_to 'Show', gcomment %></td>
+    <td><%= link_to 'Edit', edit_gcomment_path(gcomment) %></td>
+    <td><%= link_to 'Destroy', gcomment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gcomment', new_gcomment_path %>

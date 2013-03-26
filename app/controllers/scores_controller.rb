@@ -91,6 +91,62 @@ class ScoresController < ApplicationController
     end
   end
   
+  def voteGossip
+    @idGossip = params[:idGossip]
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @gossip = Gossip.find_by_id(@idGossip)
+    @score = @gossip.score
+    if (@score != nil)
+      @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
+      if (@oldvote != nil)
+        @newvote = @oldvote
+        @newvote.value = 1
+      else
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1)
+      end
+      @newvote.save
+      @score.score_pos = @score.score_pos + 1
+      @score.save
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'You have voted' }
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'No score related' }
+      end 
+    end
+  end
+
+  def voteAgainstGossip
+    @idGossip = params[:idGossip]
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @gossip = Gossip.find_by_id(@idGossip)
+    @score = @gossip.score
+    if (@score != nil)
+      @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
+      if (@oldvote != nil)
+        @newvote = @oldvote
+        @newvote.value = -1
+      else
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => -1)
+      end
+      @newvote.save
+      @score.score_pos = @score.score_pos - 1
+        @score.save
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'You have voted' }
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'No score related' }
+      end 
+    end
+  end
+
   def unvoteArticle
     @idArticle = params[:idArticle]
     @user = User.find_by_authentication_token(params[:auth_token])
@@ -147,6 +203,33 @@ class ScoresController < ApplicationController
       end 
     end
   end
-
+  def unvoteGossip
+    @idGossip = params[:idGossip]
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @score = Gossip.find(@idGossip).score
+    if (@score != nil)
+      @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
+      if (@oldvote != nil)
+        @oldvote.delete
+        @score.score_pos = @score.score_pos - 1
+        @score.save
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You have unvoted' }
+        end
+      else
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'You didn\'t vote yet' }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'No score related' }
+      end 
+    end
+  end
+  
 end
 

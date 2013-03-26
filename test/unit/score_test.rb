@@ -9,6 +9,8 @@
 #  updated_at  :datetime         not null
 #  article_id  :integer
 #  acomment_id :integer
+#  gossip_id   :integer
+#  gcomment_id :integer
 #
 
 require 'test_helper'
