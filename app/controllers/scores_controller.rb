@@ -96,16 +96,23 @@ class ScoresController < ApplicationController
     @user = User.find_by_authentication_token(params[:auth_token])
     @gossip = Gossip.find_by_id(@idGossip)
     @score = @gossip.score
+    @addvalue = 1
     if (@score != nil)
       @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
       if (@oldvote != nil)
         @newvote = @oldvote
+        if (@newvote.value == -1) # ancien vote negatif
+          @addvalue = 2
+        end
+        if (@newvote.value == 1) # ancien vote positif
+          @addvalue = 0
+        end
         @newvote.value = 1
       else
         @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1)
       end
       @newvote.save
-      @score.score_pos = @score.score_pos + 1
+      @score.score_pos = @score.score_pos + @addvalue
       @score.save
       respond_to do |format|
         format.html # index.html.erb
@@ -124,17 +131,25 @@ class ScoresController < ApplicationController
     @user = User.find_by_authentication_token(params[:auth_token])
     @gossip = Gossip.find_by_id(@idGossip)
     @score = @gossip.score
+    @addvalue = -1
+    
     if (@score != nil)
       @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
       if (@oldvote != nil)
         @newvote = @oldvote
+        if (@newvote.value == -1) # ancien vote negatif
+          @addvalue = 0
+        end
+        if (@newvote.value == 1) # ancien vote positif
+          @addvalue = -2
+        end
         @newvote.value = -1
       else
         @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => -1)
       end
       @newvote.save
-      @score.score_pos = @score.score_pos - 1
-        @score.save
+      @score.score_pos = @score.score_pos + @addvalue
+      @score.save
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: 'You have voted' }
