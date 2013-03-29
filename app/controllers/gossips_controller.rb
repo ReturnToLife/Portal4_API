@@ -23,10 +23,16 @@ class GossipsController < ApplicationController
   # GET /gossips.json
   def index
     @gossips = Gossip.all
+    @scores = []
+    @gossips.each do |gossip|
+      @score = Score.find(gossip.score_id)
+      @scores.append(gossip.id => @score.score_pos)
+    end
 
+    @res = ["gossips" => @gossips, "scores" => @scores]
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @gossips }
+      format.json { render json: @res }
     end
   end
 
@@ -86,6 +92,7 @@ class GossipsController < ApplicationController
     respond_to do |format|
       if @gossip.save
         @gossip.score = Score.create(:score_pos => 0, :score_neg => 0)
+        @gossip.score_id = @gossip.score.id
         @gossip.save
         format.html { redirect_to @gossip, notice: 'Gossip was successfully created.' }
         format.json { render json: @gossip, status: :created, location: @gossip }
