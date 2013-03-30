@@ -70,6 +70,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    debugger
     @event = Event.find(params[:id])
     array = []
     hash = {}
@@ -89,7 +90,6 @@ class EventsController < ApplicationController
     @user = User.find_by_authentication_token(params[:auth_token])
     @event = Event.new.from_json(params[:event])
     @event.user_id = @user.id
-    print @event.to_json
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -101,11 +101,26 @@ class EventsController < ApplicationController
     end
   end
 
+  # PUT /events/1/update
+  # PUT /events/1/update.json
+  def pupdate
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      if @event.update_attributes(JSON.parse(params[:event]))
+        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.json { head :no_content}
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PUT /events/1
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-
+    debugger
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }

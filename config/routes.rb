@@ -42,6 +42,7 @@ WsReturn::Application.routes.draw do
   match '/articles/delete/:id' => "articles#pdestroy", :via => :post
   match '/articles/filterbylogin/:login' => "articles#filterbylogin", :via => :post
   match '/articles/:id/acomments/delete/:id' => "acomments#pdestroy", :via => :post
+  match '/events/:id/update' => "events#pupdate", :via => :post
 
   resources :jobs
 
