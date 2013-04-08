@@ -30,7 +30,9 @@ class GossipsController < ApplicationController
 
       @scores.append(gossip.id => @score.score_pos)
       @votes = Vote.find_all_by_score_id(@score.id)
-      @votestab.append(gossip.id =>  @votes )
+      @votestab.append(gossip.id => 
+
+ @votes )
     end
 
     @res = ["gossips" => @gossips, "scores" => @scores, "votes" => @votestab]
