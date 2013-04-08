@@ -48,11 +48,16 @@ ActiveRecord::Schema.define(:version => 20130325233105) do
   end
 
   create_table "events", :force => true do |t|
-    t.datetime "date"
+    t.string   "category"
     t.integer  "user_id"
     t.integer  "score_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "title"
+    t.text     "description"
+    t.string   "place"
+    t.date     "start"
+    t.date     "end"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "gcomments", :force => true do |t|

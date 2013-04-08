@@ -1,6 +1,6 @@
 WsReturn::Application.routes.draw do
 
-
+  resources :events
 
   get "home/index"
 
@@ -10,9 +10,6 @@ WsReturn::Application.routes.draw do
 
 
   resources :schools
-
-
-
 
   resources :votes
 
@@ -38,11 +35,6 @@ WsReturn::Application.routes.draw do
 
 
   resources :tags
-
-
-  resources :events
-  
-
   resources :articles do
     resources :acomments
   end
@@ -50,6 +42,7 @@ WsReturn::Application.routes.draw do
   match '/articles/delete/:id' => "articles#pdestroy", :via => :post
   match '/articles/filterbylogin/:login' => "articles#filterbylogin", :via => :post
   match '/articles/:id/acomments/delete/:id' => "acomments#pdestroy", :via => :post
+  match '/events/:id/update' => "events#pupdate", :via => :post
 
   resources :jobs
 

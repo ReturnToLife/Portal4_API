@@ -1,23 +1,21 @@
-# == Schema Information
-#
-# Table name: events
-#
-#  id         :integer          not null, primary key
-#  date       :datetime
-#  user_id    :integer
-#  score_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  date: 2013-02-23 12:17:37
+  category: MyString
   user_id: 1
   score_id: 1
+  title: MyString
+  description: MyText
+  place: MyString
+  start: 2013-03-22 19:29:00
+  end: 2013-03-22 19:29:00
 
 two:
-  date: 2013-02-23 12:17:37
+  category: MyString
   user_id: 1
   score_id: 1
+  title: MyString
+  description: MyText
+  place: MyString
+  start: 2013-03-22 19:29:00
+  end: 2013-03-22 19:29:00
