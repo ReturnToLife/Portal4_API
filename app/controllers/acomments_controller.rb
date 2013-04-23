@@ -11,6 +11,8 @@ class AcommentsController < ApplicationController
       if @comment
         @comment.score = Score.create(:score_pos => 0, :score_neg => 0)
         @comment.save
+        @article.nb_comments = @article.nb_comments + 1
+        @article.save
         format.html { redirect_to @article, notice: 'Comment was successfully created.' }
         format.json { render json: @article, status: :created, location: @article }
       else
@@ -25,6 +27,8 @@ class AcommentsController < ApplicationController
     @article = Article.find(params[:article_id])
     @comment = @article.acomments.find(params[:id])
     @comment.destroy
+    @article.nb_comments = @article.nb_comments - 1
+    @article.save
     respond_to do |format|
       format.html { redirect_to @article, notice: 'Comment was successfully destroyed.' }
       format.json { render(json: article_path(@article))}

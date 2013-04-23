@@ -106,6 +106,7 @@ class ArticlesController < ApplicationController
   def create
     @user = User.find_by_authentication_token(params[:auth_token])
     @article = Article.new.from_json(params[:article])
+    @article.nb_comments = 0
     @article.publication_date = Time.now
     @article.user_id = @user.id
     respond_to do |format|

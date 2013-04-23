@@ -8,6 +8,7 @@
 #  value      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  login      :string(255)
 #
 
 require 'test_helper'

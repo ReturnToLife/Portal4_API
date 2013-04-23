@@ -25,12 +25,16 @@ class GossipsController < ApplicationController
     @gossips = Gossip.all
     @scores = []
     @votestab = []
+
     @gossips.each do |gossip|
       @score = Score.find(gossip.score_id)
 
       @scores.append(gossip.id => @score.score_pos)
       @votes = Vote.find_all_by_score_id(@score.id)
+      @votes.each do |vote|
+      end
       @votestab.append(gossip.id =>  @votes )
+      
     end
 
     @res = ["gossips" => @gossips, "scores" => @scores, "votes" => @votestab]

@@ -8,10 +8,11 @@
 #  value      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  login      :string(255)
 #
 
 class Vote < ActiveRecord::Base
-  attr_accessible :score_id, :user_id, :value
+  attr_accessible :score_id, :user_id, :value, :login
 
   belongs_to :user
   belongs_to :score

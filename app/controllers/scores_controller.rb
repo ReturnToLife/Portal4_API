@@ -39,7 +39,7 @@ class ScoresController < ApplicationController
     if (@score != nil)
       @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
       if (@oldvote == nil)
-        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1)
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1, :login => @user.login)
         @newvote.save
         @score.score_pos = @score.score_pos + 1
         @score.save
@@ -69,7 +69,7 @@ class ScoresController < ApplicationController
     if (@score != nil)
       @oldvote = Vote.find_by_user_id_and_score_id(@user.id, @score.id)
       if (@oldvote == nil)
-        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1)
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1, :login => @user.login)
         @newvote.save
         @score.score_pos = @score.score_pos + 1
         @score.save
@@ -109,7 +109,7 @@ class ScoresController < ApplicationController
         end
         @newvote.value = 1
       else
-        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1)
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => 1, :login => @user.login)
       end
       @newvote.save
       @score.score_pos = @score.score_pos + @addvalue
@@ -145,7 +145,7 @@ class ScoresController < ApplicationController
         end
         @newvote.value = -1
       else
-        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => -1)
+        @newvote = Vote.new(:score_id => @score.id, :user_id => @user.id, :value => -1, :login => @user.login)
       end
       @newvote.save
       @score.score_pos = @score.score_pos + @addvalue
