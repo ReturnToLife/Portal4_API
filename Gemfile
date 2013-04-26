@@ -39,3 +39,7 @@ gem 'jquery-rails'
 
 # To use debugger
  gem 'debugger'
+
+gem 'paperclip'
+
+gem 'rmagick'

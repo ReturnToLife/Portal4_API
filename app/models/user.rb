@@ -32,11 +32,19 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable #, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+  has_attached_file :photo,
+  :styles => {
+    :thumb=> "100x100#",
+    :small  => "150x150>",
+    :medium => "300x300>",
+    :large =>   "400x400>" }
+  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :photo
   attr_accessible :avatar_url, :city, :email, :firstname, :lastname, :login, :photo_url, :promo_id, :report_url, :school_id, :uid
 
 
@@ -52,6 +60,7 @@ class User < ActiveRecord::Base
   has_many :comment_gossip
   has_many :comment_event
   has_many :votes
+  # Paperclip
 
   def newtoken
     reset_authentication_token!

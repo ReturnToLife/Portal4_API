@@ -55,6 +55,8 @@
   <%= @user.email %>
 </p>
 
+<!-- <p>Small:<%= image_tag @user.photo.url(:small) %></p> -->
+<img src="127.0.0.1:3000<%= @user.photo.url(:small) %>" />
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

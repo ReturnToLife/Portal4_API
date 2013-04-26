@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408173303) do
+ActiveRecord::Schema.define(:version => 20130426052851) do
 
   create_table "acomments", :force => true do |t|
     t.integer  "user_id"
@@ -146,6 +146,9 @@ ActiveRecord::Schema.define(:version => 20130408173303) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "authentication_token"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
