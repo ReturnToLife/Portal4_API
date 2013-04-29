@@ -22,10 +22,15 @@ class GossipsController < ApplicationController
   # GET /gossips
   # GET /gossips.json
   def index
-    @gossips = Gossip.all
+    @gossips = nil
+    if (params['group_id'])
+      @gossips = Gossip.find_all_by_group_id(params['group_id'])
+    else
+      @gossips = Gossip.all
+    end
     @scores = []
     @votestab = []
-
+    
     @gossips.each do |gossip|
       @score = Score.find(gossip.score_id)
 
@@ -69,6 +74,7 @@ class GossipsController < ApplicationController
     end
     user = User.find(@gossip.user_id)
     res = { :gossip => hash, :comments => array, :login => user.login, :votes => likearray}
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: res }

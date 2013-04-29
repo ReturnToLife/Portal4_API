@@ -46,7 +46,10 @@ WsReturn::Application.routes.draw do
 
   resources :jobs
 
+  
 
+  match '/groups/:id/savemember' => "groups#savemember", :via => :post
+  
   resources :groups
 
 

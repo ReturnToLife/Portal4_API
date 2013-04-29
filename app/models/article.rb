@@ -15,10 +15,11 @@
 #  event_id         :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  group_id         :integer
 #
 
 class Article < ActiveRecord::Base
-  attr_accessible :category, :content, :event_id, :nb_comments, :publication_date, :score_id, :status, :thumbnail, :title, :user_id, :id, :created_at, :updated_at
+  attr_accessible :category, :content, :event_id, :nb_comments, :publication_date, :score_id, :status, :thumbnail, :title, :user_id, :id, :created_at, :updated_at, :group_id
 
 #  validates :category, :presence => true
  # validates :content, :prensence => true
@@ -28,8 +29,10 @@ class Article < ActiveRecord::Base
  # validates :user_id, :presence => true
 
   belongs_to :user
+  belongs_to :group
   has_many :authors
   has_one :score
   has_many :acomments, :dependent => :destroy
   has_many :tags
+
 end

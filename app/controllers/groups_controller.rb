@@ -1,12 +1,33 @@
 class GroupsController < ApplicationController
+  before_filter :after_token_authentication
+
+  def after_token_authentication
+    if params[:auth_token].present?
+      @user = User.find_by_authentication_token(params[:auth_token]) # we are finding 
+
+      if (@user == nil)
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: 'Wrong token' }
+        end 
+      end
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: 'You need a token' }
+      end
+    end
+  end
+
   # GET /groups
   # GET /groups.json
   def index
     @groups = Group.all
 
+    @res = ["groups" => @groups]
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @groups }
+      format.json { render json: @res }
     end
   end
 
@@ -14,9 +35,43 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    us = User.find_by_authentication_token(params[:auth_token])
+    hash = {}
+    @group.attribute_names.each {|var| hash[var] = @group.instance_variable_get("@attributes")[var] }
+    members = {}
+    articles = Article.find_all_by_group_id(@group.id)
 
+    members = Job.find_all_by_group_id(@group.id)
+    members_info = []
+    is_admin = "false"
+    members.each do |member|
+      user = User.find(member.user_id)
+      if (user.id == us.id && member.job == "admin")
+        is_admin = "true"
+      end
+      members_info.append(user.login => member.job)
+    end
+    res = { :group => hash, :members => members, :members_info => members_info , :articles => articles, :is_admin => is_admin}
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render json: res }
+    end
+  end
+
+  def savemember
+    puts "Everybody here?"
+    user = User.find_by_login(params[:login])
+    if (user != nil)
+      puts "lets start!"
+      job = Job.new(:user_id => user.id, :group_id => params[:group_id],  :job => params[:job])
+      puts "lets save!"
+      job.save
+      puts "my job is over here!"
+    else
+      
+    end
+    respond_to do |format|
+      format.html # savemember.html.erb
       format.json { render json: @group }
     end
   end
