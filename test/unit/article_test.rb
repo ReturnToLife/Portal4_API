@@ -15,6 +15,7 @@
 #  event_id         :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  group_id         :integer
 #
 
 require 'test_helper'
