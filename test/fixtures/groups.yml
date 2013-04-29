@@ -14,9 +14,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
-  parent_id: 1
-
+  id: 1
+  title: "Ping! Developpers"
+  commentary: "This group is only for Ping! Developpers"
+  contact: "Email me at vincent.munoz91@gmail.com"
+  
 two:
-  title: MyString
-  parent_id: 1
+  id: 2
+  title: "Java haters"
+  commentary: "This group is for people who hates Java and specially Eclipse"
+  contact: "Feel free to add any member"
+
+

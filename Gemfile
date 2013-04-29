@@ -10,7 +10,7 @@ gem 'rspec'
 gem 'annotate'
 gem 'devise'
 gem 'cancan'
-
+gem 'rails-erd'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

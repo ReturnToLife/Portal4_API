@@ -31,27 +31,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  login: MyString
-  firstname: MyString
-  lastname: MyString
-  promo_id: 1
-  school_id: 1
-  city: MyString
-  photo_url: MyString
-  avatar_url: MyString
-  uid: 1
-  report_url: MyString
-  email: MyString
+  id: 1
+  login: munoz_v
+  firstname: Vincent
+  lastname: Munoz
+  city: Paris
+  email: vincent.munoz91@gmail.com
+  encrypted_password: "$2a$10$xjS9K4SoL3wHdEgl98FZGem6YvNYKCN5nQae99ep.iFia4JvSBita"
 
 two:
-  login: MyString
-  firstname: MyString
-  lastname: MyString
-  promo_id: 1
-  school_id: 1
-  city: MyString
-  photo_url: MyString
-  avatar_url: MyString
-  uid: 1
-  report_url: MyString
-  email: MyString
+  id: 2
+  login: bideau_s
+  firstname: Sofia
+  lastname: Bideaux
+  city: "Long Beach"
+  email: sofia.bideaux@gmail.com
+  encrypted_password: "$2a$10$6weOgbVZ.QdUC4zDe5d84OfhIkJlo0rIMieLbTes7ecTptNowyydi"
+
+

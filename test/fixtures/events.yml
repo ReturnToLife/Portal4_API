@@ -17,22 +17,13 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  category: MyString
-  user_id: 1
-  score_id: 1
-  title: MyString
-  description: MyText
-  place: MyString
-  start: 2013-03-22 19:29:00
-  end: 2013-03-22 19:29:00
+#one:
+#  category: MyString
+#  user_id: 1
+#  score_id: 1
+#  title: MyString
+#  description: MyText
+#  place: MyString
+#  start: 2013-03-22 19:29:00
+#  end: 2013-03-22 19:29:00
 
-two:
-  category: MyString
-  user_id: 1
-  score_id: 1
-  title: MyString
-  description: MyText
-  place: MyString
-  start: 2013-03-22 19:29:00
-  end: 2013-03-22 19:29:00

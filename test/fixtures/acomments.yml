@@ -14,11 +14,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user: MyString
-  body: MyText
-  article: 
+  id: 1
+  user_id: 1
+  body: "And the comments section is working too!"
+  article_id: 1
+  score_id: 3
 
 two:
-  user: MyString
-  body: MyText
-  article: 
+  id: 2
+  user_id: 2
+  body: "Really?? So cool!"
+  article_id: 1
+  score_id: 4
+
+three:
+  id: 3
+  user_id: 3
+  body: "I can't wait for more functionality!"
+  article_id: 1
+  score_id: 5
+
+
+four:
+  id: 4
+  user_id: 1
+  body: "And the comments section is still working!"
+  article_id: 2
+  score_id: 6
+
+five:
+  id: 5
+  user_id: 2
+  body: "Really?? So cool!!"
+  article_id: 2
+  score_id: 7

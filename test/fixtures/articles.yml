@@ -21,25 +21,38 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
+  id: 1
+  title: "The website is open!"
   user_id: 1
   publication_date: 2013-02-23 12:17:34
-  thumbnail: MyString
-  nb_comments: 1
-  content: MyText
-  category: MyString
+  nb_comments: 3
+  content: "The Ping! platform is now in beta test! Feel free to contact us for any issue with this website"
+  category: general
   status: 1
   score_id: 1
-  event_id: 1
+  group_id: 1
+
 
 two:
-  title: MyString
+  id: 2
+  title: "We have fixed some bugs"
   user_id: 1
   publication_date: 2013-02-23 12:17:34
-  thumbnail: MyString
-  nb_comments: 1
-  content: MyText
-  category: MyString
+  nb_comments: 4
+  content: "We have fixed some bugs, but we still need your help in order to improve this plateform"
+  category: general
   status: 1
-  score_id: 1
-  event_id: 1
+  score_id: 2
+  group_id: 1
+
+#two:
+ # title: MyString
+ # user_id: 1
+ # publication_date: 2013-02-23 12:17:34
+ # thumbnail: MyString
+ # nb_comments: 1
+ # content: MyText
+ # category: MyString
+ # status: 1
+ # score_id: 1
+ # event_id: 1

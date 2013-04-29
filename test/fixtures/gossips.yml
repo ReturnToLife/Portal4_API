@@ -14,11 +14,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  text: MyString
-  score_id: 1
+  id: 1
+  text: "The Ping! beta is comming soon"
+  score_id: 8
   user_id: 1
+  group_id: 1
 
 two:
-  text: MyString
-  score_id: 1
-  user_id: 1
+  id: 2
+  text: "Vincent is coming back to France"
+  score_id: 9
+  user_id: 2

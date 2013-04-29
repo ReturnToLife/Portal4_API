@@ -16,9 +16,55 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  score_pos: 1
-  score_neg: 1
+  id: 1
+  score_pos: 0
+  score_neg: 0
+  article_id: 1
 
 two:
-  score_pos: 1
-  score_neg: 1
+  id: 2
+  score_pos: 0
+  score_neg: 0
+  article_id: 2
+
+three:
+  id: 3
+  score_pos: 0
+  score_neg: 0
+  acomment_id: 1
+
+four:
+  id: 4
+  score_pos: 0
+  score_neg: 0
+  acomment_id: 2
+
+five:
+  id: 5
+  score_pos: 0
+  score_neg: 0
+  acomment_id: 3
+
+six:
+  id: 6
+  score_pos: 0
+  score_neg: 0
+  acomment_id: 4
+
+seven:
+  id: 7
+  score_pos: 0
+  score_neg: 0
+  acomment_id: 5
+
+eight:
+  id: 8
+  score_pos: 0
+  score_neg: 0
+  gossip_id: 1
+
+nine:
+  id: 9
+  score_pos: 0
+  score_neg: 0
+  gossip_id: 2
