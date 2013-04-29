@@ -24,8 +24,12 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-   
-    @articles = Article.all
+    @articles = nil
+    if (params['group_id'])
+      @articles = Article.find_all_by_group_id(params['group_id'])
+    else
+      @articles = Article.all
+    end
     array = []
     @articles.each do |article|
       hash = {}
