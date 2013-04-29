@@ -24,10 +24,9 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
 
-    @res = ["groups" => @groups]
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @res }
+      format.json { render json: @groups }
     end
   end
 
@@ -44,14 +43,18 @@ class GroupsController < ApplicationController
     members = Job.find_all_by_group_id(@group.id)
     members_info = []
     is_admin = "false"
+    is_member = "false"
     members.each do |member|
       user = User.find(member.user_id)
+      if (user.id == us.id)
+        is_member = "true"
+      end
       if (user.id == us.id && member.job == "admin")
         is_admin = "true"
       end
       members_info.append(user.login => member.job)
     end
-    res = { :group => hash, :members => members, :members_info => members_info , :articles => articles, :is_admin => is_admin}
+    res = { :group => hash, :members => members, :members_info => members_info , :articles => articles, :is_admin => is_admin, :is_member => is_member}
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: res }
@@ -95,10 +98,11 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(params[:group])
-
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @group = Group.new.from_json(params[:group])
     respond_to do |format|
       if @group.save
+        job = Job.create(:user_id => @user.id, :group_id => @group.id, :job => "admin")
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render json: @group, status: :created, location: @group }
       else

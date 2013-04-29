@@ -1,0 +1,35 @@
+<h1>Listing ressources</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Borrow date</th>
+    <th>Estimate date</th>
+    <th>Status</th>
+    <th>User</th>
+    <th>Group</th>
+    <th>Commentary</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ressources.each do |ressource| %>
+  <tr>
+    <td><%= ressource.name %></td>
+    <td><%= ressource.borrow_date %></td>
+    <td><%= ressource.estimate_date %></td>
+    <td><%= ressource.status %></td>
+    <td><%= ressource.user_id %></td>
+    <td><%= ressource.group_id %></td>
+    <td><%= ressource.commentary %></td>
+    <td><%= link_to 'Show', ressource %></td>
+    <td><%= link_to 'Edit', edit_ressource_path(ressource) %></td>
+    <td><%= link_to 'Destroy', ressource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ressource', new_ressource_path %>
