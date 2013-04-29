@@ -1,5 +1,9 @@
 WsReturn::Application.routes.draw do
 
+  match '/ressources/delete/:id' => "ressources#pdestroy", :via => :post
+  resources :ressources
+
+
   resources :events
 
   get "home/index"

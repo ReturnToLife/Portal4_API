@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ressource.name %>
+</p>
+
+<p>
+  <b>Borrow date:</b>
+  <%= @ressource.borrow_date %>
+</p>
+
+<p>
+  <b>Estimate date:</b>
+  <%= @ressource.estimate_date %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @ressource.status %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @ressource.user_id %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @ressource.group_id %>
+</p>
+
+<p>
+  <b>Commentary:</b>
+  <%= @ressource.commentary %>
+</p>
+
+
+<%= link_to 'Edit', edit_ressource_path(@ressource) %> |
+<%= link_to 'Back', ressources_path %>
