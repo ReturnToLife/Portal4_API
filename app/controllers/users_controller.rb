@@ -14,11 +14,14 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    user = User.find(params[:id])
+    votes = votes = Vote.find_all_by_user_id(user.id)
+    scores = []
+    votes.each {|vote| scores.append(Score.find(vote.score_id))}
     hash = {}
-    hash["user"] = @user
-    hash["articles"] = Article.find_all_by_user_id(@user.id)
-    hash["acomments"] = Acomment.find_all_by_user_id(@user.id)
+    hash["user"] = user
+    hash["articles"] = Article.find_all_by_user_id(user.id)
+    hash["acomments"] = Acomment.find_all_by_user_id(user.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: hash }
@@ -83,6 +86,26 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+  
+  def   pupdate
+    tempfile = Tempfile.new(params[:filename])
+    tempfile.write(params[:file])
+    photo = ActionDispatch::Http::UploadedFile.new({:filename=>params[:filename], :type=>params[:content_type], :tempfile=>tempfile})
+    @user = User.find(params[:id])
+    @user.photo = photo
+    @user.photo.save
+    @user.save
+    format.json { head :no_content }
+    # respond_to do |format|
+    #   if @user.update_attributes(params[:user])
+    #     format.html { redirect_to @user, notice: 'User was successfully updated.' }
+    #     format.json { head :no_content }
+    #   else
+    #     format.html { render action: "edit" }
+    #     format.json { render json: @user.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
 end
