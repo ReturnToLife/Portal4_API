@@ -50,6 +50,7 @@ class GroupsController < ApplicationController
         is_member = "true"
       end
       if (user.id == us.id && member.job == "admin")
+        puts "is admin"
         is_admin = "true"
       end
       members_info.append(user.login => member.job)

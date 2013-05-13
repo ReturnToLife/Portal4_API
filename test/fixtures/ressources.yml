@@ -16,11 +16,24 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-#one:
-#  name: MyString
-#  borrow_date: 2013-04-28
-#  estimate_date: 2013-04-28
-#  status: 1
-#  user_id: 1
-#  group_id: 1
-#  commentary: MyText
+one:
+  id: 1
+  name: "Room 1"
+  borrow_date: 2013-04-28
+  estimate_date: 2013-04-30
+  status: 2
+  user_id: 1
+  group_id: 1
+  commentary: "I need it for a meeting with the team"
+
+two:
+  id: 2
+  name: "Room 2"
+  borrow_date: 2013-04-28
+  estimate_date: 2013-04-30
+  status: 1
+  user_id: 2
+  group_id: 1
+  commentary: ""
+
+

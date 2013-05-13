@@ -49,3 +49,20 @@ two:
   encrypted_password: "$2a$10$6weOgbVZ.QdUC4zDe5d84OfhIkJlo0rIMieLbTes7ecTptNowyydi"
 
 
+three:
+  id: 3
+  login: meilha_v
+  firstname: Vivien
+  lastname: Meilhac
+  city: "Chicago"
+  email: meilhac.v@gmail.com
+  encrypted_password: "$2a$10$Q8KfCj7qC6v3cx/lpATkq.ICzlErMCYNlMviIRJU9FKlqCZjl.kDy"
+
+four:
+  id: 4
+  login: lepage_b
+  firstname: Barbara
+  lastname: Lepage
+  city: "Nice"
+  email: db0company@gmail.com
+  encrypted_password: "$2a$10$PoH5BYipTL5Oio6f0Ow55eMIkO.Dvt0aWsoiuBOUjUqfTSERGtrJ6"
