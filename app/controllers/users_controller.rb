@@ -22,6 +22,12 @@ class UsersController < ApplicationController
     hash["user"] = user
     hash["articles"] = Article.find_all_by_user_id(user.id)
     hash["acomments"] = Acomment.find_all_by_user_id(user.id)
+    me = User.find_by_authentication_token(params[:auth_token])
+    if user.id == me.id
+      hash["isme"] = "true";
+    else
+      hash["isme"] = "false";
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: hash }
